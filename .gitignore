@@ -1,0 +1,94 @@
+# ==========================
+# Environment Files
+# ==========================
+**/.env
+**/.env.*
+!.env.example
+
+# ==========================
+# Java / Maven / Spring Boot
+# ==========================
+**/target/
+**/build/
+*.class
+*.jar
+*.war
+*.ear
+
+# Maven Wrapper Logs
+.mvn/wrapper/maven-wrapper.jar
+
+# ==========================
+# Node / React
+# ==========================
+**/node_modules/
+**/dist/
+**/build/
+**/.next/
+**/.cache/
+**/.turbo/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ==========================
+# IDEs
+# ==========================
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# ==========================
+# Operating System Files
+# ==========================
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ==========================
+# Logs
+# ==========================
+logs/
+*.log
+
+# ==========================
+# Temporary Files
+# ==========================
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# ==========================
+# Docker
+# ==========================
+**/.docker/
+
+# ==========================
+# Coverage & Reports
+# ==========================
+coverage/
+**/coverage/
+**/.nyc_output/
+**/reports/
+
+# ==========================
+# Test Output
+# ==========================
+**/surefire-reports/
+**/failsafe-reports/
+
+# ==========================
+# Local Database Files
+# ==========================
+*.db
+*.sqlite
+*.sqlite3
+
+# ==========================
+# Git
+# ==========================
+.git/

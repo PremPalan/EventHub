@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.server.resource.web.BearerTokenAuthenticationFilter;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfigurationSource;
 
 @Configuration
 public class SecurityConfig {
@@ -15,14 +16,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http,
                                            UserProvisioningFilter userProvisioningFilter,
-                                           JwtAuthenticationConverter jwtAuthenticationConverter
+                                           JwtAuthenticationConverter jwtAuthenticationConverter,
+                                           CorsConfigurationSource corsConfigurationSource
     ) throws Exception {
 
         http
+                .cors(cors -> cors.configurationSource(corsConfigurationSource))
                 .authorizeHttpRequests(authorize -> authorize
+                                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/api/v1/published-events/**").permitAll()
-                                .requestMatchers("/api/v1/events").hasRole("ORGANIZER")
-                                .requestMatchers("/api/v1/ticket-validations").hasRole("STAFF")
+                                .requestMatchers("/api/v1/events/**").hasRole("ORGANIZER")
+                                .requestMatchers("/api/v1/ticket-validations/**").hasRole("STAFF")
                                 .requestMatchers("/health").permitAll()
                                 .anyRequest().authenticated())
                 .csrf(csrf -> csrf.disable())

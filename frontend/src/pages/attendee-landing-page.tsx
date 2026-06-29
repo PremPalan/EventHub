@@ -48,6 +48,7 @@ const AttendeeLandingPage: React.FC = () => {
   const queryPublishedEvents = async () => {
     if (!query) {
       await refreshPublishedEvents();
+      return; // <-- Only change
     }
 
     try {
@@ -106,6 +107,7 @@ const AttendeeLandingPage: React.FC = () => {
           </div>
         )}
       </div>
+
       {/* Hero */}
       <div className="container mx-auto px-4 mb-8">
         <div className="bg-[url(/organizers-landing-hero.png)] bg-cover min-h-[200px] rounded-lg bg-bottom md:min-h-[250px]">
@@ -142,7 +144,7 @@ const AttendeeLandingPage: React.FC = () => {
           <SimplePagination
             pagination={publishedEvents}
             onPageChange={setPage}
-          />{" "}
+          />
         </div>
       )}
     </div>

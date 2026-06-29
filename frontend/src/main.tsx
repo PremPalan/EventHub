@@ -105,9 +105,9 @@ const router = createBrowserRouter([
 ]);
 
 const oidcConfig = {
-  authority: "http://localhost:9090/realms/event-ticket-platform",
-  client_id: "event-ticket-platform-app",
-  redirect_uri: "http://localhost:5173/callback",
+  authority: "https://auth.eventhubcity.online/realms/eventhub",
+  client_id: "eventhub-frontend",
+  redirect_uri: "https://eventhubcity.online/callback",
 };
 
 createRoot(document.getElementById("root")!).render(

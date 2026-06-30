@@ -23,12 +23,21 @@ public class SecurityConfig {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource))
                 .authorizeHttpRequests(authorize -> authorize
-                                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/api/v1/published-events/**").permitAll()
-                                .requestMatchers("/api/v1/events/**").hasRole("ORGANIZER")
-                                .requestMatchers("/api/v1/ticket-validations/**").hasRole("STAFF")
-                                .requestMatchers("/health").permitAll()
-                                .anyRequest().authenticated())
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/published-events/**").permitAll()
+
+                        // ADD THIS (must be before /api/v1/events/**)
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/api/v1/events/*/ticket-types/*/tickets"
+                        ).hasRole("ATTENDEE")
+
+                        // Existing organizer APIs
+                        .requestMatchers("/api/v1/events/**").hasRole("ORGANIZER")
+
+                        .requestMatchers("/api/v1/ticket-validations/**").hasRole("STAFF")
+                        .requestMatchers("/health").permitAll()
+                        .anyRequest().authenticated())
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

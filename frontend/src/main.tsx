@@ -107,7 +107,14 @@ const router = createBrowserRouter([
 const oidcConfig = {
   authority: "https://auth.eventhubcity.online/realms/eventhub",
   client_id: "eventhub-frontend",
+
   redirect_uri: "https://eventhubcity.online/callback",
+
+  response_type: "code",
+
+  scope: "openid profile email",
+
+  automaticSilentRenew: true,
 };
 
 createRoot(document.getElementById("root")!).render(

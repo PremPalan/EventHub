@@ -7,18 +7,18 @@ const CallbackPage: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isLoading) {
-      return;
-    }
+  if (isLoading) {
+    return;
+  }
 
-    if (isAuthenticated) {
-      const redirectPath = localStorage.getItem("redirectPath");
-      if (redirectPath) {
-        localStorage.removeItem("redirectPath");
-        navigate(redirectPath);
-      }
-    }
-  }, [isLoading, isAuthenticated, navigate]);
+  if (isAuthenticated) {
+    const redirectPath = localStorage.getItem("redirectPath");
+
+    localStorage.removeItem("redirectPath");
+
+    navigate(redirectPath || "/dashboard", { replace: true });
+  }
+}, [isLoading, isAuthenticated, navigate]);
 
   if (isLoading) {
     return <p>Processing login...</p>;
